@@ -1,0 +1,1751 @@
+
+/* ===== simple-dialog ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.simple-dialog-dialog, .simple-dialog-simpleDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.simple-dialog-dialog li, .simple-dialog-simpleDialog li {
+  list-style: none;
+}
+.simple-dialog-dialog button, .simple-dialog-simpleDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.simple-dialog-dialog button[data-focused=true]::after, .simple-dialog-simpleDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.simple-dialog-dialog .simple-dialog-meta, .simple-dialog-simpleDialog .simple-dialog-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="p."], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="1"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="2"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="3"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="4"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="5"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="6"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="7"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="8"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="9"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="10"], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="num."], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite=cards], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite="info."], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite=players], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite=choice], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite=location], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.simple-dialog-dialog .simple-dialog-meta[data-sprite=help], .simple-dialog-simpleDialog .simple-dialog-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.simple-dialog-simpleDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  min-width: 225px;
+}
+.simple-dialog-simpleDialog[data-dialog=multiplayer] {
+  top: 50%;
+  left: calc(50% + 175px / var(--dialog-boost, 1));
+  translate: -50% -50%;
+  min-width: 0;
+  width: max-content;
+  padding: 0.35rem 1.4rem;
+}
+.simple-dialog-simpleDialog[data-dialog=quit], .simple-dialog-simpleDialog[data-dialog=timer] {
+  position: static;
+  translate: none;
+  min-width: 0;
+  width: max-content;
+  height: 2.5rem;
+  padding: 0 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.simple-dialog-simpleDialog[data-dialog=pack] {
+  position: static;
+  translate: none;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: max-content;
+  max-width: 2.5rem;
+  transition: max-width 0.2s ease-in;
+}
+.simple-dialog-simpleDialog[data-dialog=pack][data-expanded=true] {
+  max-width: 12rem;
+  transition: max-width 0.5s ease-in-out;
+}
+.simple-dialog-simpleDialog[data-dialog=install] {
+  position: static;
+  translate: none;
+  min-width: 0;
+  width: 470px;
+  max-width: var(--dialog-max-width, none);
+}
+.simple-dialog-simpleDialog[data-dialog=options] {
+  opacity: 0.35;
+  translate: -100% -100%;
+  height: 2.5rem;
+  padding: 1px;
+  min-width: 0;
+  overflow: hidden;
+  width: max-content;
+  max-width: 400px;
+  transition: max-width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.simple-dialog-simpleDialog[data-dialog=options][data-expanded=false] {
+  max-width: 2.5rem;
+  transition: max-width 0.2s ease-in;
+}
+.simple-dialog-simpleDialog[data-dialog=options][data-expanded=false] img:first-child {
+  box-shadow: none;
+  border: none;
+  transform: scaleX(-100%);
+  padding: 0.2rem 0.35rem;
+}
+.simple-dialog-simpleDialog[data-dialog=options]:hover, .simple-dialog-simpleDialog[data-dialog=options]:has([data-focused=true]) {
+  opacity: 1;
+}
+.simple-dialog-simpleDialog[data-dialog=options] [data-focused=true] {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.simple-dialog-simpleDialog[data-dialog=options] > div > img,
+.simple-dialog-simpleDialog[data-dialog=options] > div > div {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+.simple-dialog-simpleDialog[data-dialog=options] > div > img:hover, .simple-dialog-simpleDialog[data-dialog=options] > div > img:active,
+.simple-dialog-simpleDialog[data-dialog=options] > div > div:hover,
+.simple-dialog-simpleDialog[data-dialog=options] > div > div:active {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.simple-dialog-simpleDialog[data-dialog=options] img {
+  width: auto;
+  object-fit: contain;
+  margin: 0;
+  padding: 0.2rem 0.4rem 0.2rem 0.5rem;
+  border-right: 2px solid #030303;
+  box-shadow: 1.5px 0 0 #7d7f7e;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+.simple-dialog-simpleDialog[data-dialog=options] img[data-selected=true] {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ===== confirm-dialog ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.confirm-dialog-dialog, .confirm-dialog-confirmationDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.confirm-dialog-dialog li, .confirm-dialog-confirmationDialog li {
+  list-style: none;
+}
+.confirm-dialog-dialog button, .confirm-dialog-confirmationDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.confirm-dialog-dialog button[data-focused=true]::after, .confirm-dialog-confirmationDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.confirm-dialog-dialog .confirm-dialog-meta, .confirm-dialog-confirmationDialog .confirm-dialog-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="p."], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="1"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="2"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="3"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="4"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="5"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="6"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="7"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="8"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="9"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="10"], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="num."], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite=cards], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite="info."], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite=players], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite=choice], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite=location], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.confirm-dialog-dialog .confirm-dialog-meta[data-sprite=help], .confirm-dialog-confirmationDialog .confirm-dialog-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.confirm-dialog-confirmationDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 11;
+}
+
+/* ===== pagination ===== */
+.pagination-pagination {
+  animation: blink 0.5s infinite;
+  line-height: 13px;
+}
+.pagination-pagination button {
+  height: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.pagination-pagination button::before {
+  content: "";
+  display: block;
+  background-image: url("../assets/pagination-arrows.png");
+  image-rendering: pixelated;
+  margin-bottom: 1px;
+  width: 6px;
+  height: 10px;
+}
+.pagination-pagination button[data-prev] {
+  padding-right: 10px;
+}
+.pagination-pagination button[data-prev]::before {
+  margin-left: 1px;
+  background-position: 0 0;
+}
+.pagination-pagination button[data-next] {
+  padding-left: 10px;
+}
+.pagination-pagination button[data-next]::before {
+  margin-right: 1px;
+  background-position: -7px 0;
+}
+.pagination-pagination button::after {
+  content: none !important;
+}
+
+.pagination-paginationContainer > div {
+  transition: all 0.2s ease-in;
+  transform: translateX(0);
+  margin-top: 5px;
+}
+.pagination-paginationContainer [data-slide-direction=prev] {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+.pagination-paginationContainer [data-slide-direction=next] {
+  transform: translateX(10%);
+  opacity: 0;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ===== ellipsis ===== */
+.ellipsis-ellipsis {
+  display: inline-flex;
+}
+.ellipsis-ellipsis > span[data-shown=false] {
+  visibility: hidden;
+}
+
+/* ===== notice ===== */
+.notice-notice {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 8;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ===== menu-dialog ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.menu-dialog-dialog, .menu-dialog-menuDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.menu-dialog-dialog li, .menu-dialog-menuDialog li {
+  list-style: none;
+}
+.menu-dialog-dialog button, .menu-dialog-menuDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.menu-dialog-dialog button[data-focused=true]::after, .menu-dialog-menuDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.menu-dialog-dialog .menu-dialog-meta, .menu-dialog-menuDialog .menu-dialog-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="p."], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="1"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="2"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="3"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="4"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="5"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="6"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="7"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="8"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="9"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="10"], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="num."], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite=cards], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite="info."], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite=players], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite=choice], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite=location], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.menu-dialog-dialog .menu-dialog-meta[data-sprite=help], .menu-dialog-menuDialog .menu-dialog-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.menu-dialog-menuDialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+.menu-dialog-menuDialog[data-dialog=playerSelection] {
+  top: 80%;
+  width: 250px;
+}
+.menu-dialog-menuDialog[data-dialog=playerSelection] h3,
+.menu-dialog-menuDialog[data-dialog=playerSelection] p {
+  text-align: center;
+}
+
+/* ===== mode-dialog ===== */
+@charset "UTF-8";
+.mode-dialog-modeDialog {
+  min-width: 0;
+  width: 470px;
+  text-align: center;
+  top: var(--mode-anchor, 74%);
+}
+
+.mode-dialog-question {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.mode-dialog-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.mode-dialog-links {
+  display: flex;
+}
+.mode-dialog-linkBar {
+  padding: 0 !important;
+  overflow: hidden;
+  align-items: stretch !important;
+}
+.mode-dialog-linkItems {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  max-width: 40rem;
+  transition: max-width 0.5s ease-in-out;
+}
+
+.mode-dialog-linkBar[data-expanded=false] .mode-dialog-linkItems {
+  max-width: 0;
+}
+.mode-dialog-link {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  height: 100%;
+  padding: 0 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 #212121;
+  transition: background-color 0.2s ease-in;
+}
+.mode-dialog-link:hover, .mode-dialog-link:active {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.mode-dialog-toggle {
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+}
+.mode-dialog-linkItems .mode-dialog-link {
+  border-left: 2px solid #030303;
+  box-shadow: inset 1.5px 0 0 #7d7f7e;
+}
+
+/* ===== mp-dialog ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.mp-dialog-dialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.mp-dialog-dialog li {
+  list-style: none;
+}
+.mp-dialog-dialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.mp-dialog-dialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.mp-dialog-dialog .mp-dialog-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.mp-dialog-dialog .mp-dialog-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.mp-dialog-lobby {
+  min-width: 420px;
+  padding: 1.5rem 1.75rem;
+  z-index: 10;
+  text-align: center;
+}
+
+.mp-dialog-section {
+  margin-bottom: 0.5rem;
+}
+
+.mp-dialog-label {
+  opacity: 0.75;
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: center;
+}
+.mp-dialog-code {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.mp-dialog-codeInput {
+  position: absolute;
+  top: -12px;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.mp-dialog-codeSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  opacity: 0.4;
+}
+.mp-dialog-codeSlot[data-filled=true] {
+  opacity: 1;
+}
+.mp-dialog-codeSlot[data-caret=true] {
+  animation: codeCaret 1s steps(2, end) infinite;
+}
+
+@keyframes codeCaret {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.15;
+  }
+}
+.mp-dialog-divider {
+  height: 2px;
+  margin: 1.1rem 0;
+  background: #8b8e8d;
+}
+
+.mp-dialog-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.1rem;
+}
+.mp-dialog-row .mp-dialog-action {
+  margin-inline: 0;
+}
+
+.mp-dialog-action {
+  position: relative;
+  width: max-content;
+  margin-inline: auto;
+}
+.mp-dialog-action:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.mp-dialog-link {
+  display: inline-flex;
+  justify-content: center;
+  opacity: 0.7;
+  margin: 0 auto;
+}
+
+.mp-dialog-rules {
+  text-align: left;
+  display: inline-block;
+}
+:root[data-phone="true"]:not([data-stacked="true"]) .mp-dialog-rules ul {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(4, auto);
+  column-gap: 1.4rem;
+  justify-content: start;
+}
+
+.mp-dialog-rules li span {
+  display: flex;
+}
+
+.mp-dialog-status {
+  margin-top: 1.1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.mp-dialog-problem {
+  margin-top: 0.9rem;
+  display: flex;
+  justify-content: center;
+  opacity: 0.9;
+}
+.mp-dialog-rulesScreen {
+  width: max-content;
+  min-width: 0;
+  max-width: min(100%, var(--dialog-max-width, 100%));
+}
+
+.mp-dialog-ruleList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.15rem 3.6rem;
+  margin-bottom: 0.4rem;
+}
+:root[data-stacked="true"] .mp-dialog-ruleList {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.15rem;
+}
+.mp-dialog-ruleList button.mp-dialog-ruleToggle[data-focused=true]::after,
+.mp-dialog-tradeRow button.mp-dialog-tradeOption[data-focused=true]::after {
+  left: -52px;
+  width: 45px;
+  height: 28px;
+  top: 50%;
+  margin-top: -14px;
+}
+
+.mp-dialog-ruleToggle {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1.2rem;
+}
+.mp-dialog-deckRuleList {
+  display: flex;
+  justify-content: center;
+}
+.mp-dialog-deckRuleList .mp-dialog-ruleToggle {
+  width: auto;
+}
+
+.mp-dialog-deckRuleList button.mp-dialog-ruleToggle[data-focused=true]::after {
+  left: -52px;
+  width: 45px;
+  height: 28px;
+  top: 50%;
+  margin-top: -14px;
+}
+
+.mp-dialog-toggleState {
+  opacity: 0.4;
+  min-width: 2.4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.mp-dialog-toggleState[data-on=true] {
+  opacity: 1;
+}
+
+.mp-dialog-tradeRow {
+  display: flex;
+  justify-content: center;
+  gap: 3.8rem;
+}
+:root[data-phone="true"] .mp-dialog-tradeRow {
+  gap: 2rem;
+}
+
+.mp-dialog-tradeOption {
+  position: relative;
+}
+.mp-dialog-tradeOption > * {
+  opacity: 0.4;
+}
+.mp-dialog-tradeOption[data-on=true] > * {
+  opacity: 1;
+}
+.mp-dialog-tradeOption[data-locked] > * {
+  opacity: 0.18;
+}
+.mp-dialog-tradeOption[data-locked][data-on=true] > * {
+  opacity: 0.75;
+}
+.mp-dialog-dividerOr {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.1rem 0;
+}
+.mp-dialog-dividerOr .mp-dialog-divider {
+  flex: 1;
+  margin: 0;
+}
+
+.mp-dialog-or {
+  display: flex;
+  opacity: 0.75;
+}
+
+/* ===== win-dialog ===== */
+/*
+ * El recorte de "You Win!" / "You Lose..." / "Draw" es una sola imagen
+ * (assets/finishmsg.png, 330x279px) con las 5 frases apiladas en vertical;
+ * object-position selecciona la fila. Esa posición (0 / -85px / -339px)
+ * solo encaja si la caja mide exactamente 500x84px: a ese tamaño,
+ * object-fit:cover escala la imagen a 500x422.7px (5 filas de ~84.5px), que
+ * es justo lo que esos tres desplazamientos asumen.
+ *
+ * El original usaba "width: stretch" (ocupar el ancho del contenedor), que
+ * en el proyecto React casi nunca medía 500px de verdad -> la imagen se
+ * escalaba a otro tamaño y la fila mostrada salía mal recortada o se veía
+ * un trozo en blanco (el bug que se ve con "Draw"/"You Lose"/"You Win").
+ * Fijar el ancho a 500px (el mismo valor que ya llevaba el atributo
+ * width="500" del <img>) hace que el recorte sea siempre exacto.
+ */
+.win-dialog-finishMsg {
+  height: 84px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 4;
+}
+.win-dialog-finishMsg[data-win-state=blue] {
+  object-position: 0 0;
+}
+.win-dialog-finishMsg[data-win-state=red] {
+  object-position: 0 -85px;
+}
+.win-dialog-finishMsg[data-win-state=draw] {
+  object-position: 0 -339px;
+}
+
+/* ===== pack-button ===== */
+@charset "UTF-8";
+.pack-button-wrap {
+  transition: opacity 0.3s ease-in-out;
+}
+.pack-button-wrap[data-ready=false] {
+  opacity: 0.55;
+}
+.pack-button-wrap[data-ready=false][data-open=true] {
+  opacity: 1;
+}
+
+.pack-button-packButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+.pack-button-packButton[data-ready=true]:hover, .pack-button-packButton[data-ready=true]:active {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.pack-button-packButton[data-ready=false] {
+  cursor: default;
+}
+.pack-button-timer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 7.5rem;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  border-left: 2px solid #030303;
+  white-space: nowrap;
+}
+.pack-button-timer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1.5px;
+  background: #7d7f7e;
+  z-index: 2;
+}
+.pack-button-charge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  animation-name: pack-charge;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+.pack-button-clock {
+  position: relative;
+  z-index: 1;
+  padding: 0 0.7rem;
+}
+
+.pack-button-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 1.6rem;
+  margin: 0;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: opacity 0.3s ease-in;
+}
+
+@keyframes pack-charge {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ===== pack-dialog ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.pack-dialog-dialog, .pack-dialog-packDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.pack-dialog-dialog li, .pack-dialog-packDialog li {
+  list-style: none;
+}
+.pack-dialog-dialog button, .pack-dialog-packDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.pack-dialog-dialog button[data-focused=true]::after, .pack-dialog-packDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.pack-dialog-dialog .pack-dialog-meta, .pack-dialog-packDialog .pack-dialog-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="p."], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="1"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="2"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="3"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="4"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="5"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="6"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="7"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="8"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="9"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="10"], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="num."], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite=cards], .pack-dialog-packDialog .pack-dialog-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite="info."], .pack-dialog-packDialog .pack-dialog-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite=players], .pack-dialog-packDialog .pack-dialog-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite=choice], .pack-dialog-packDialog .pack-dialog-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite=location], .pack-dialog-packDialog .pack-dialog-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.pack-dialog-dialog .pack-dialog-meta[data-sprite=help], .pack-dialog-packDialog .pack-dialog-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+.pack-dialog-packContainer {
+  background: radial-gradient(50% 50%, #fbf8e1 1%, rgba(244, 235, 223, 0.6705882353) 40%, rgba(50, 49, 49, 0.3294117647) 100%), url("../assets/bg-accent.png"), url("../assets/bg.png");
+  background-blend-mode: soft-light;
+  background-size: cover, contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.pack-dialog-packContainer .pack-dialog-cell {
+  width: 128px;
+  height: 163px;
+}
+.pack-dialog-packContainer .pack-dialog-cell[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  margin-left: -22px;
+  margin-top: -95px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  z-index: 5;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.pack-dialog-packContainer [data-player=red] {
+  cursor: pointer;
+}
+.pack-dialog-packContainer [data-revealed=true] {
+  animation: pack-card-flip 450ms ease-in-out forwards;
+}
+.pack-dialog-packContainer [data-collecting=true] {
+  animation: pack-card-collect 720ms ease-in forwards;
+}
+.pack-dialog-packContainer .pack-dialog-cell:nth-child(1) [data-collecting=true] {
+  animation-delay: 0ms;
+  --collect-x: 256px;
+}
+.pack-dialog-packContainer .pack-dialog-cell:nth-child(2) [data-collecting=true] {
+  animation-delay: 72ms;
+  --collect-x: 128px;
+}
+.pack-dialog-packContainer .pack-dialog-cell:nth-child(3) [data-collecting=true] {
+  animation-delay: 144ms;
+  --collect-x: 0px;
+}
+.pack-dialog-packContainer .pack-dialog-cell:nth-child(4) [data-collecting=true] {
+  animation-delay: 216ms;
+  --collect-x: -128px;
+}
+.pack-dialog-packContainer .pack-dialog-cell:nth-child(5) [data-collecting=true] {
+  animation-delay: 288ms;
+  --collect-x: -256px;
+}
+.pack-dialog-dialogAnchor {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 106px);
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 100%;
+}
+.pack-dialog-packDialog {
+  position: relative;
+}
+.pack-dialog-headingLine {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes pack-card-flip {
+  50% {
+    transform: rotate3d(0, 1, 0, 0.5turn) scale(1.2);
+    background: linear-gradient(to top, rgb(51, 66, 135) 0%, rgb(185, 209, 235) 100%);
+    z-index: 3;
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 1turn) scale(1);
+    background: linear-gradient(to top, rgb(51, 66, 135) 0%, rgb(185, 209, 235) 100%);
+  }
+}
+@keyframes pack-card-collect {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(0, -24px) scale(1.04);
+  }
+  100% {
+    transform: translate(var(--collect-x, 0), 900px) scale(0.5);
+  }
+}
+
+/* ===== install-hint ===== */
+@charset "UTF-8";
+.install-hint-installHint {
+  position: fixed;
+  top: var(--furniture-gap);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 11;
+  text-align: center;
+  width: max-content;
+  max-width: var(--dialog-max-width, none);
+}
+.install-hint-installHint button {
+  margin-top: 0.2rem;
+}
+.install-hint-heading {
+  margin-bottom: 0.35rem;
+}
+.install-hint-body {
+  opacity: 0.75;
+}
+
+/* ===== enemy-select ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.enemy-select-dialog, .enemy-select-enemySelectionDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.enemy-select-dialog li, .enemy-select-enemySelectionDialog li {
+  list-style: none;
+}
+.enemy-select-dialog button, .enemy-select-enemySelectionDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.enemy-select-dialog button[data-focused=true]::after, .enemy-select-enemySelectionDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.enemy-select-dialog .enemy-select-meta, .enemy-select-enemySelectionDialog .enemy-select-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="p."], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="1"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="2"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="3"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="4"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="5"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="6"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="7"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="8"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="9"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="10"], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="num."], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite=cards], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite="info."], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite=players], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite=choice], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite=location], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.enemy-select-dialog .enemy-select-meta[data-sprite=help], .enemy-select-enemySelectionDialog .enemy-select-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.enemy-select-enemySelectionDialog {
+  position: absolute;
+  top: calc(50% + 249px / var(--dialog-boost, 1) + var(--picker-nudge, 0px) - var(--picker-lift, 0px));
+  left: 50%;
+  translate: -50% -50%;
+  width: 380px;
+  height: 70px;
+}
+.enemy-select-enemySelectionDialog h3,
+.enemy-select-enemySelectionDialog p {
+  text-align: center;
+}
+.enemy-select-enemySelectionDialog > div {
+  margin-top: -5px;
+}
+.enemy-select-enemySelectionDialog[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+
+/* ===== location-select ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.location-select-dialog, .location-select-locationSelectionDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.location-select-dialog li, .location-select-locationSelectionDialog li {
+  list-style: none;
+}
+.location-select-dialog button, .location-select-locationSelectionDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.location-select-dialog button[data-focused=true]::after, .location-select-locationSelectionDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.location-select-dialog .location-select-meta, .location-select-locationSelectionDialog .location-select-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.location-select-dialog .location-select-meta[data-sprite="p."], .location-select-locationSelectionDialog .location-select-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.location-select-dialog .location-select-meta[data-sprite="1"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="2"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="3"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="4"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="5"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="6"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="7"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="8"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="9"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="10"], .location-select-locationSelectionDialog .location-select-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.location-select-dialog .location-select-meta[data-sprite="num."], .location-select-locationSelectionDialog .location-select-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.location-select-dialog .location-select-meta[data-sprite=cards], .location-select-locationSelectionDialog .location-select-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.location-select-dialog .location-select-meta[data-sprite="info."], .location-select-locationSelectionDialog .location-select-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.location-select-dialog .location-select-meta[data-sprite=players], .location-select-locationSelectionDialog .location-select-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.location-select-dialog .location-select-meta[data-sprite=choice], .location-select-locationSelectionDialog .location-select-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.location-select-dialog .location-select-meta[data-sprite=location], .location-select-locationSelectionDialog .location-select-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.location-select-dialog .location-select-meta[data-sprite=help], .location-select-locationSelectionDialog .location-select-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.location-select-locationSelectionDialog {
+  position: absolute;
+  top: calc(50% + 186px / var(--dialog-boost, 1) - var(--picker-lift, 0px));
+  left: 50%;
+  translate: -50% -50%;
+  width: 380px;
+  height: 46px;
+}
+.location-select-locationSelectionDialog h3,
+.location-select-locationSelectionDialog p {
+  text-align: center;
+  margin: 0;
+}
+.location-select-locationSelectionDialog > div {
+  margin-top: -5px;
+}
+.location-select-locationSelectionDialog[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+
+/* ===== autoplay-timer ===== */
+@charset "UTF-8";
+.autoplay-timer-wrap {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: none;
+}
+.autoplay-timer-wrap[data-shown=true], .autoplay-timer-wrap[data-urgent=true] {
+  opacity: 1;
+}
+
+.autoplay-timer-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.autoplay-timer-label {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 112px;
+  opacity: 0.75;
+}
+
+.autoplay-timer-clock {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 50px;
+}
+[data-urgent=true] .autoplay-timer-clock {
+  animation: pulse 1s steps(2, end) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,49 @@
+// Datos originales del juego (locations.json), incrustados como JS para
+// poder ejecutar el juego con doble clic en index.html sin servidor.
+window.TT_DATA = window.TT_DATA || {};
+window.TT_DATA.locations = [
+    {
+        "id": 0,
+        "location": "Balamb Garden"
+    },
+    {
+        "id": 1,
+        "location": "Balamb Town"
+    },
+    {
+        "id": 2,
+        "location": "Timber"
+    },
+    {
+        "id": 3,
+        "location": "Dollet"
+    },
+    {
+        "id": 4,
+        "location": "Deling City"
+    },
+    {
+        "id": 5,
+        "location": "Fisherman's Horizon"
+    },
+    {
+        "id": 6,
+        "location": "Winhill"
+    },
+    {
+        "id": 7,
+        "location": "Trabia Garden"
+    },
+    {
+        "id": 8,
+        "location": "Shumi Village"
+    },
+    {
+        "id": 9,
+        "location": "Edea's House"
+    },
+    {
+        "id": 10,
+        "location": "Lunar Base"
+    }
+];

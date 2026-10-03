@@ -1,0 +1,288 @@
+/* Clases de utilidad (equivalentes a las utilidades usadas originalmente).
+ * Generadas una sola vez a partir de las clases realmente usadas en la app;
+ * el proyecto final no depende de ningun framework en tiempo de ejecucion. */
+.pointer-events-none {
+  pointer-events: none
+}
+
+.\!visible {
+  visibility: visible !important
+}
+
+.visible {
+  visibility: visible
+}
+
+.invisible {
+  visibility: hidden
+}
+
+.static {
+  position: static
+}
+
+.fixed {
+  position: fixed
+}
+
+.absolute {
+  position: absolute
+}
+
+.relative {
+  position: relative
+}
+
+.bottom-0 {
+  bottom: 0px
+}
+
+.bottom-\[var\(--furniture-gap\)\] {
+  bottom: var(--furniture-gap)
+}
+
+.left-0 {
+  left: 0px
+}
+
+.left-\[var\(--furniture-gap\)\] {
+  left: var(--furniture-gap)
+}
+
+.right-\[var\(--furniture-gap\)\] {
+  right: var(--furniture-gap)
+}
+
+.top-0 {
+  top: 0px
+}
+
+.top-\[80\%\] {
+  top: 80%
+}
+
+.top-\[var\(--furniture-gap\)\] {
+  top: var(--furniture-gap)
+}
+
+.z-10 {
+  z-index: 10
+}
+
+.z-\[11\] {
+  z-index: 11
+}
+
+.order-1 {
+  order: 1
+}
+
+.order-2 {
+  order: 2
+}
+
+.order-3 {
+  order: 3
+}
+
+.m-0 {
+  margin: 0px
+}
+
+.m-20 {
+  margin: 5rem
+}
+
+.m-auto {
+  margin: auto
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem
+}
+
+.my-0 {
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem
+}
+
+.mb-7 {
+  margin-bottom: 1.75rem
+}
+
+.ml-1 {
+  margin-left: 0.25rem
+}
+
+.ml-2 {
+  margin-left: 0.5rem
+}
+
+.ml-3 {
+  margin-left: 0.75rem
+}
+
+.ml-4 {
+  margin-left: 1rem
+}
+
+.mr-1 {
+  margin-right: 0.25rem
+}
+
+.mr-3 {
+  margin-right: 0.75rem
+}
+
+.mr-4 {
+  margin-right: 1rem
+}
+
+.mt-2 {
+  margin-top: 0.5rem
+}
+
+.block {
+  display: block
+}
+
+.inline {
+  display: inline
+}
+
+.flex {
+  display: flex
+}
+
+.\!grid {
+  display: grid !important
+}
+
+.grid {
+  display: grid
+}
+
+.hidden {
+  display: none
+}
+
+.h-full {
+  height: 100%
+}
+
+.h-screen {
+  height: 100vh
+}
+
+.w-1\/2 {
+  width: 50%
+}
+
+.w-\[150px\] {
+  width: 150px
+}
+
+.w-\[535px\] {
+  width: 535px
+}
+
+.w-full {
+  width: 100%
+}
+
+.w-screen {
+  width: 100vw
+}
+
+.max-w-4xl {
+  max-width: 56rem
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0
+}
+
+.cursor-pointer {
+  cursor: pointer
+}
+
+.resize {
+  resize: both
+}
+
+.flex-col {
+  flex-direction: column
+}
+
+.items-center {
+  align-items: center
+}
+
+.justify-start {
+  justify-content: flex-start
+}
+
+.justify-end {
+  justify-content: flex-end
+}
+
+.justify-center {
+  justify-content: center
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.gap-1 {
+  gap: 0.25rem
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain
+}
+
+.p-1 {
+  padding: 0.25rem
+}
+
+.text-center {
+  text-align: center
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.opacity-0 {
+  opacity: 0
+}
+
+.opacity-50 {
+  opacity: 0.5
+}
+
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5
+}

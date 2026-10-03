@@ -1,0 +1,564 @@
+
+/* ===== card-selection ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.card-selection-dialog, .card-selection-cardSelectionDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.card-selection-dialog li, .card-selection-cardSelectionDialog li {
+  list-style: none;
+}
+.card-selection-dialog button, .card-selection-cardSelectionDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.card-selection-dialog button[data-focused=true]::after, .card-selection-cardSelectionDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.card-selection-dialog .card-selection-meta, .card-selection-cardSelectionDialog .card-selection-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="p."], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="1"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="2"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="3"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="4"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="5"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="6"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="7"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="8"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="9"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="10"], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="num."], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.card-selection-dialog .card-selection-meta[data-sprite=cards], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite="info."], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite=players], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite=choice], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite=location], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.card-selection-dialog .card-selection-meta[data-sprite=help], .card-selection-cardSelectionDialog .card-selection-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+
+.card-selection-cardSelectionDialog {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 175px / var(--dialog-boost, 1));
+  translate: -50% -50%;
+  width: 288px;
+  min-height: 300px;
+}
+.card-selection-cardSelectionDialog[data-dialog=card-gallery] {
+  position: relative;
+  left: 0;
+  top: 0;
+  translate: none;
+  height: 100%;
+  width: auto;
+  min-height: 0;
+}
+.card-selection-cardSelectionDialog .card-selection-cardSelectionPreview {
+  left: calc(100% + 32px);
+  bottom: 32px;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  animation: spinCard 4s ease-in-out 2s forwards, infiniteSpin 4s linear 2s infinite;
+}
+.card-selection-cardSelectionDialog .card-selection-cardListItem[data-focused=true]:before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: 2px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.card-selection-cardSelectionDialog .card-selection-cardListItem img {
+  margin-top: -2px;
+}
+
+@keyframes spinCard {
+  0% {
+    transform: rotateY(0deg);
+  }
+  20% {
+    transform: rotateX(-20deg);
+  }
+  100% {
+    transform: rotateY(359deg) rotateX(-20deg);
+  }
+}
+@keyframes infiniteSpin {
+  0% {
+    transform: rotateY(1deg) rotateX(-20deg);
+  }
+  100% {
+    transform: rotateY(359deg) rotateX(-20deg);
+  }
+}
+.card-selection-waiting {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+  opacity: 0.8;
+}
+.card-selection-handStatus {
+  display: flex;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ===== card-gallery ===== */
+@charset "UTF-8";
+.card-gallery-cardGalleryContainer {
+  --dialog-max-width: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8666666667);
+  z-index: 11;
+  position: fixed;
+  left: 0;
+}
+:root[data-phone="true"] .card-gallery-cardGalleryContainer {
+  --dialog-boost: 1;
+}
+.card-gallery-cardGalleryContainer > div {
+  width: calc(100% - 10rem);
+  max-width: 700px;
+}
+
+.card-gallery-currentPageTitle {
+  top: 0;
+  left: 0;
+  translate: none;
+  position: relative;
+  min-width: 0;
+  width: 80%;
+}
+
+.card-gallery-galleryTitle {
+  top: 0;
+  left: 0;
+  translate: none;
+  position: relative;
+  width: 20%;
+  min-width: 0;
+}
+
+.card-gallery-selectedCardMeta {
+  left: 0;
+  top: 0;
+  translate: none;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.card-gallery-cardDetails {
+  top: 0;
+  left: 0;
+  translate: none;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.card-gallery-cardStatistics {
+  top: 0;
+  left: 0;
+  translate: none;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  flex: 1;
+}
+
+/* ===== reward-select ===== */
+@charset "UTF-8";
+@keyframes boxOpen {
+  from {
+    scale: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.reward-select-dialog, .reward-select-rewardSelectionDialog {
+  animation: boxOpen 200ms cubic-bezier(0.2, 0.9, 0.3, 1) 120ms both;
+  zoom: var(--dialog-boost, 1);
+  max-width: var(--dialog-max-width, none);
+  background: linear-gradient(125deg, #434546, #696c69);
+  box-shadow: inset -1px -1px 0 0 #363536, inset 1px 1px 0px 1px #7c7f7e, inset -1px -1px 1px 1px #363536;
+  outline: 2px solid #000;
+  color: #fff;
+  padding: 16px 18px 14px;
+  z-index: 3;
+}
+.reward-select-dialog li, .reward-select-rewardSelectionDialog li {
+  list-style: none;
+}
+.reward-select-dialog button, .reward-select-rewardSelectionDialog button {
+  text-align: center;
+  text-shadow: 2px 2px 0 #212121;
+}
+.reward-select-dialog button[data-focused=true]::after, .reward-select-rewardSelectionDialog button[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  left: -55px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  margin-top: -18px;
+  z-index: 4;
+  image-rendering: pixelated;
+}
+.reward-select-dialog .reward-select-meta, .reward-select-rewardSelectionDialog .reward-select-meta {
+  text-indent: -10000%;
+  background: url("../assets/meta-spritesheet.png");
+  background-size: 257px 32px;
+  image-rendering: pixelated;
+  height: 9px;
+  position: absolute;
+  top: 0;
+  left: 8px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="p."], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="p."] {
+  width: 10px;
+  background-position: 0px -1px;
+  left: 43px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="1"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="1"] {
+  width: 9px;
+  background-position: -22px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="2"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="2"] {
+  width: 9px;
+  background-position: -33px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="3"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="3"] {
+  width: 9px;
+  background-position: -43px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="4"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="4"] {
+  width: 9px;
+  background-position: -53px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="5"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="5"] {
+  width: 9px;
+  background-position: -63px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="6"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="6"] {
+  width: 9px;
+  background-position: -74px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="7"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="7"] {
+  width: 9px;
+  background-position: -84px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="8"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="8"] {
+  width: 9px;
+  background-position: -94px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="9"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="9"] {
+  width: 9px;
+  background-position: -105px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="10"], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="10"] {
+  width: 14px;
+  background-position: -115px -1px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="num."], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="num."] {
+  width: 29px;
+  background-position: 0px -12px;
+  left: calc(100% - 55px);
+}
+.reward-select-dialog .reward-select-meta[data-sprite=cards], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite=cards] {
+  width: 38px;
+  background-position: -30px -12px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite="info."], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite="info."] {
+  width: 29px;
+  background-position: -69px -76px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite=players], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite=players] {
+  width: 49px;
+  background-position: -99px -13px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite=choice], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite=choice] {
+  width: 38px;
+  background-position: -148px -13px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite=location], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite=location] {
+  width: 53px;
+  background-position: -187px -13px;
+}
+.reward-select-dialog .reward-select-meta[data-sprite=help], .reward-select-rewardSelectionDialog .reward-select-meta[data-sprite=help] {
+  width: 28px;
+  background-position: -131px -1px;
+}
+.reward-select-rewardSelectionContainer {
+  background: radial-gradient(50% 50%, #fbf8e1 1%, rgba(244, 235, 223, 0.6705882353) 40%, rgba(50, 49, 49, 0.3294117647) 100%), url("../assets/bg-accent.png"), url("../assets/bg.png");
+  background-blend-mode: soft-light;
+  background-size: cover, contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.reward-select-rewardSelectionContainer .reward-select-cell {
+  width: 128px;
+  height: 163px;
+}
+.reward-select-rewardSelectionContainer .reward-select-cell[data-focused=true]::after {
+  content: "";
+  position: absolute;
+  margin-left: -22px;
+  margin-top: -95px;
+  background-image: url("../assets/cursor.png");
+  background-size: cover;
+  width: 45px;
+  height: 28px;
+  z-index: 5;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.reward-select-rewardSelectionContainer [data-selected][data-confirmed][data-player=blue] {
+  animation: card-flip-blue 0.45s ease-in-out forwards;
+}
+.reward-select-rewardSelectionContainer [data-selected][data-confirmed][data-player=blue][data-confirmed=true] {
+  z-index: 4;
+  animation: card-preview-blue 2.7s ease-in-out forwards;
+}
+.reward-select-rewardSelectionContainer [data-enemy-selected][data-confirmed][data-player=red] {
+  animation: card-flip-red 0.45s ease-in-out forwards;
+}
+.reward-select-rewardSelectionContainer [data-enemy-selected][data-confirmed][data-player=red][data-confirmed=true] {
+  z-index: 4;
+  animation: card-preview-red 2.7s ease-in-out 0.45s forwards;
+}
+
+.reward-select-rewardSelectionDialog {
+  position: relative;
+}
+.reward-select-rewardSelectionDialog[data-animation]:not([data-animation=""])[data-player=red] {
+  animation: red-reward-label 1.44s forwards 0s ease-in-out;
+}
+.reward-select-rewardSelectionDialog[data-animation]:not([data-animation=""])[data-player=blue] {
+  animation: blue-reward-label 1.08s forwards 0s ease-in-out;
+}
+
+.reward-select-dialogContainer {
+  min-height: 53px;
+}
+
+@keyframes card-preview-blue {
+  0% {
+    transform: translateY(0);
+    z-index: 1;
+  }
+  30% {
+    transform: translateY(-3000px) scale(1.5);
+  }
+  31% {
+    transform: translateY(-3000px) translateX(-50%) scale(1.5);
+  }
+  40% {
+    transform: translateY(80px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+    z-index: 3;
+  }
+  80% {
+    transform: translateY(80px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+  }
+  100% {
+    transform: translateY(3000px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+  }
+}
+@keyframes card-preview-red {
+  0% {
+    transform: translateY(0);
+    z-index: 0;
+  }
+  30% {
+    transform: translateY(3000px) scale(1.5);
+  }
+  31% {
+    transform: translateY(3000px) translateX(-50%) scale(1.5);
+  }
+  40% {
+    transform: translateY(-113px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+    z-index: 3;
+  }
+  80% {
+    transform: translateY(-113px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+  }
+  100% {
+    transform: translateY(-3000px) translateX(-50%) scale(1.5);
+    left: 50%;
+    position: absolute;
+  }
+}
+@keyframes card-flip-blue {
+  50% {
+    transform: rotate3d(0, 1, 0, 0.5turn) scale(1.2);
+    background: linear-gradient(to top, rgb(51, 66, 135) 0%, rgb(185, 209, 235) 100%);
+    z-index: 3;
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 1turn) scale(1);
+    background: linear-gradient(to top, rgb(51, 66, 135) 0%, rgb(185, 209, 235) 100%);
+  }
+}
+@keyframes card-flip-red {
+  50% {
+    transform: rotate3d(0, 1, 0, 0.5turn) scale(1.2);
+    background: linear-gradient(to top, rgb(131, 48, 66) 0%, rgb(235, 186, 208) 100%);
+    z-index: 3;
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 1turn) scale(1);
+    background: linear-gradient(to top, rgb(131, 48, 66) 0%, rgb(235, 186, 208) 100%);
+  }
+}
+@keyframes red-reward-label {
+  0% {
+    transform: translateY(3000px);
+  }
+  70% {
+    transform: translateY(3000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes blue-reward-label {
+  0% {
+    transform: translateY(-3000px);
+  }
+  70% {
+    transform: translateY(-3000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.reward-select-headingLine {
+  display: flex;
+  justify-content: center;
+}

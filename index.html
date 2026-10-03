@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Triple Triad</title>
+  <meta name="description" content="The Final Fantasy VIII card game, in the browser.">
+  <meta name="theme-color" content="#434546">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/192.png">
+  <link rel="apple-touch-icon" href="./icons/180.png">
+
+  <!-- CSS, en orden: base (reset + globals.css), tipografía sprite, utilidades
+       equivalentes a Tailwind, luego los diálogos/menús genéricos (que
+       incluyen el estilo base del que "extienden" muchos otros: tiene que
+       cargar primero para que las clases más específicas de board/cards,
+       con la misma especificidad CSS, ganen el empate por orden de carga). -->
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="stylesheet" href="./css/utilities.css">
+  <link rel="stylesheet" href="./css/menus.css">
+  <link rel="stylesheet" href="./css/board.css">
+  <link rel="stylesheet" href="./css/cards.css">
+</head>
+<body>
+  <div id="app-root"></div>
+
+  <!-- Datos del juego, incrustados como JS (nada de fetch: funciona con
+       doble clic en este archivo, sin necesitar un servidor). -->
+  <script src="./data/cards.js"></script>
+  <script src="./data/players.js"></script>
+  <script src="./data/locations.js"></script>
+  <script src="./data/ruleSets.js"></script>
+  <script src="./data/rules.js"></script>
+  <script src="./data/elements.js"></script>
+  <!-- Efectos de sonido cortos embebidos en base64 (ver js/sounds.js: fetch()
+       no funciona bajo file://, así que estos van incrustados). -->
+  <script src="./data/sfx.js"></script>
+
+  <!-- Motor del juego -->
+  <script src="./js/general.js"></script>
+  <script src="./js/platform.js"></script>
+  <script src="./js/i18n.js"></script>
+  <script src="./js/textToSprite.js"></script>
+  <script src="./js/furniture.js"></script>
+  <script src="./js/sounds.js"></script>
+  <script src="./js/cardPacks.js"></script>
+  <script src="./js/ai.js"></script>
+  <script src="./js/aiCardSelection.js"></script>
+  <script src="./js/rooms.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/multiplayerSession.js"></script>
+  <script src="./js/nav.js"></script>
+  <script src="./js/rules.js"></script>
+
+  <!-- Componentes de interfaz -->
+  <script src="./js/components/simpleDialog.js"></script>
+  <script src="./js/components/cardValues.js"></script>
+  <script src="./js/components/card.js"></script>
+  <script src="./js/components/ellipsis.js"></script>
+  <script src="./js/components/dialogPagination.js"></script>
+  <script src="./js/components/indicator.js"></script>
+  <script src="./js/components/boardMessage.js"></script>
+  <script src="./js/components/notice.js"></script>
+  <script src="./js/components/confirmationDialog.js"></script>
+  <script src="./js/components/hand.js"></script>
+  <script src="./js/components/locationSelection.js"></script>
+  <script src="./js/components/enemySelection.js"></script>
+  <script src="./js/components/menuDialog.js"></script>
+  <script src="./js/components/modeDialog.js"></script>
+  <script src="./js/components/cardSelectionDialog.js"></script>
+  <script src="./js/components/cardGallery.js"></script>
+  <script src="./js/components/winDialog.js"></script>
+  <script src="./js/components/rewardSelectionDialog.js"></script>
+  <script src="./js/components/packButton.js"></script>
+  <script src="./js/components/packDialog.js"></script>
+  <script src="./js/components/installHint.js"></script>
+  <script src="./js/components/board.js"></script>
+
+  <!-- Arranque -->
+  <script src="./js/main.js"></script>
+</body>
+</html>

@@ -87,7 +87,3 @@ necesidad de tocar la lógica de cada archivo.
 - **Cambiar los enlaces de la pantalla de título** (Github, sitio web) → el array `LINKS` al
   principio de `js/components/modeDialog.js`
 
-## Informe de migración
-
-Ver el resumen que Claude entregó en la conversación (componentes migrados, qué se conservó,
-qué necesitó adaptación, qué no se pudo migrar y por qué, y cómo se probó).

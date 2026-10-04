@@ -192,6 +192,29 @@ body {
   height: 100%;
 }
 
+/**
+ * **`#app-root` tiene que medir el 100% de `body`, no solo "lo que haga falta".**
+ *
+ * `body` es `display:flex` y `#app-root` es su unico hijo, sin `flex-grow`
+ * declarado -> por defecto es `0`, así que el hijo NO crece para ocupar el
+ * ancho disponible: se queda con el ancho "de contenido" que le sale de
+ * resolver el `width:100%`/`max-w-4xl` de `#app` en ese contexto (en Chromium,
+ * mas estrecho que el propio `max-w-4xl`), y el hueco que falta hasta el borde
+ * de la ventana se lo queda `justify-content` (su valor por defecto, "normal",
+ * se comporta como `flex-start`) -> todo el bloque del juego (incluido el
+ * logo "Triple Triad" bajo la pantalla de titulo) aparece pegado a la
+ * izquierda en vez de centrado, y solo se nota cuando la ventana es bastante
+ * mas ancha que alta (el `zoom` de `scaleApp()` deja entonces hueco de sobra).
+ *
+ * Con `#app-root` a `width:100%` ya no hay ese hueco que repartir: mide
+ * siempre el ancho real de la ventana, y el `margin:auto` + `max-w-4xl` de
+ * `#app` (ver utilities.css) es quien centra el juego dentro de el, como
+ * ya hacia en las ventanas mas estrechas/altas donde el bug no se notaba.
+ */
+#app-root {
+  width: 100%;
+}
+
 /* No double-tap or pinch zoom; the app scales itself. Safari only honours
    touch-action on the element actually touched, so apply it everywhere */
 html,
